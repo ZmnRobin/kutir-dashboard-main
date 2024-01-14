@@ -1,13 +1,13 @@
 // Import necessary dependencies
 import React from 'react';
-import Card from '@/app/_components/dashboard/Card'; // Adjust the import path if needed
-import RevenueChart from '@/app/_components/dashboard/RevenueChart';
-import { revenue } from '@/app/lib/data';
+import { revenue } from '../../../lib/data';
+import Card from '../../../_components/dashboard/Card';
+import RevenueChart from '../../../_components/dashboard/RevenueChart';
 
 export default function HomePage() {
   return (
     <main>
-      <h1 className={`mb-4 text-xl md:text-2xl`}>Dashboard</h1>
+      <h1 className={`mb-4 text-xl md:text-2xl`}>Admin Dashboard</h1>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
       <Card title="Collected" value="15" type="collected" />
       <Card title="Pending" value="9" type="pending" />

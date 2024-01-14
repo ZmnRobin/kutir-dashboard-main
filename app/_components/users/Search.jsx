@@ -3,19 +3,15 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { useSearchParams,usePathname, useRouter  } from 'next/navigation';
 
-export default function Search({ placeholder }) {
+export default function Search({ placeholder,onSearch}) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
   function handleSearch(term) {
-    const params = new URLSearchParams(searchParams);
-    if (term) {
-      params.set('query', term);
-    } else {
-      params.delete('query');
-    }
-    replace(`${pathname}?${params.toString()}`);
+    console.log(term);
+    onSearch(term); // Pass the search term to the parent component
+
   }
 
   return (

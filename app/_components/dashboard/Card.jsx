@@ -12,7 +12,7 @@ import {
     invoices: InboxIcon,
   };
   
-export default function Cards({title,value,type}) {
+export default function Card({title,value,type}) {
     const Icon = iconMap[type];
     return (
       <div className="rounded-xl bg-gray-50 p-2 shadow-sm">

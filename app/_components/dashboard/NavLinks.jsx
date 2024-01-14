@@ -1,8 +1,10 @@
 'use client'
+
 import {
   UserGroupIcon,
   HomeIcon,
   Cog6ToothIcon,
+  UserCircleIcon
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -12,12 +14,10 @@ import clsx from 'clsx';
 // Depending on the size of the application, this would be stored in a database.
 
 const links = [
-  { name: 'Home', href: '/dashboard', icon: HomeIcon },
-  {
-    name: 'Users',
-    href: '/dashboard/users',
-    icon: UserGroupIcon,
-  },
+  { name: 'Home', href: '/dashboard/admin', icon: HomeIcon },
+  {name: 'Users', href: '/dashboard/admin/users',icon: UserGroupIcon,},
+  {name: 'Accounts', href: '/dashboard/accounts',icon: UserCircleIcon,},
+  {name: 'Seller', href: '/dashboard/seller',icon: UserCircleIcon,},
   { name: 'Setting', href: '/dashboard/setting', icon: Cog6ToothIcon },
 ];
 

@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className='text-center mt-20'>
       <h1 className='text-3xl'>Kutir IT Homepage</h1>
-      <Link href='/dashboard' className='mt-10'>Go To dashboard</Link>
+      <Link href='/dashboard/admin' className='mt-10'>Go To dashboard</Link>
     </div>
   )
 }

@@ -1,11 +1,28 @@
+'use client'
 import Image from 'next/image';
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
-import Role from '@/app/_components/users/Role';
-import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
-import { UserList } from '@/app/lib/data';
+import Role from '../users/Role';
+import { formatDateToLocal, formatCurrency } from '../../lib/utils';
+import { UserList } from '../../lib/data';
 import Link from 'next/link';
+import { deleteSingleUser} from '../../lib/api';
 
-export default function Table() {
+export default function Table({userList,setUserList,openUpdateModal}) {
+  
+  const handleDeleteUser = async (userId) => {
+    try {
+      // Delete user from the database
+      await deleteSingleUser(userId);
+
+      // Update the UI by removing the deleted user from the state
+      const updatedUserList = userList.filter(user => user._id !== userId);
+      setUserList(updatedUserList);
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      // Handle error here (e.g., display error message)
+    }
+  };
+
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
@@ -31,9 +48,9 @@ export default function Table() {
               </tr>
             </thead>
             <tbody className="bg-white">
-              {UserList?.map((user) => (
+              {userList?.map((user) => (
                 <tr
-                  key={user.id}
+                  key={user._id}
                   className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                 >
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
@@ -60,14 +77,11 @@ export default function Table() {
                  
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
-                        <Link
-                            href="#"
-                            className="rounded-md border p-2 hover:bg-gray-100"
-                            >
-                            <PencilIcon className="w-5" />
+                        <Link href="#" className="rounded-md border p-2 hover:bg-gray-100">
+                            <PencilIcon className="w-5" onClick={()=>openUpdateModal(user._id)} />
                         </Link>
                         <Link href="#" className="rounded-md border p-2 hover:bg-gray-100">
-                            <TrashIcon className="w-5" />
+                            <TrashIcon className="w-5" onClick={()=>handleDeleteUser(user._id)}/>
                         </Link>
                     </div>
                   </td>
